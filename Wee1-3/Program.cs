@@ -37,7 +37,7 @@ namespace Wee1_3
             //}
 
             counter = 5;
-            PI = 23;
+            //PI = 23;
 
             Console.WriteLine("Hello world");
         }

@@ -5,7 +5,7 @@ namespace Week4
     {
         static void Main(string[] args)
         {
-            //nesne oluşturma.
+            //Nesne oluşturma.
 
            // Kitap kitap; //null reference
                 
@@ -19,18 +19,20 @@ namespace Week4
 
             //obje üzerinden erişilebilen tüm üyelere instance member denir.
             //kitap4.KapakRengi   kopya üye/instance member
-            // kitap4.ToplamKitapSayisi(); //Hata!
+            //kitap4.ToplamKitapSayisi(); //Hata!
 
             //sadece sınıf ismi üzerinden erişilebilen üyelere static member denir.
             //kitap4.ToplamKitapSayisi; Hata!
             //Console.WriteLine(Kitap.toplamKitapSayisi);
             //Kitap.toplamKitapSayisi = 200;
-            // Kitap.ToplamKitapSayisi();
+            //Kitap.ToplamKitapSayisi();
 
 
 
             Console.WriteLine(kitap4[1]);
 
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

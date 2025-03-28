@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Encapsulation", "01-Enca
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Inheritance", "02-Inheritance", "{B9138A29-9B46-45DB-B00C-3ED10C8986A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InheritanceExample", "InheritanceExample\InheritanceExample.csproj", "{96E9BA34-8EA3-4D3C-AE47-4AC21A6362A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week5.InheritanceExample", "InheritanceExample\Week5.InheritanceExample.csproj", "{96E9BA34-8EA3-4D3C-AE47-4AC21A6362A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week6", "Week6", "{43420E4F-43AA-4BBD-AAC4-A16692E44336}"
 EndProject

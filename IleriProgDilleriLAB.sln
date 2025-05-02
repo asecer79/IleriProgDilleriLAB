@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week10-11.03-Collections", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week10-11.04-GenericTypesAndMethods", "Week10-11.04-GenericTypesAndMethods\Week10-11.04-GenericTypesAndMethods.csproj", "{DAEC338A-D3AA-401B-B5F8-5EDA53D14826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week10-11.05-DelegatesAndMethods", "Week10-11.05-DelegatesAndMethods\Week10-11.05-DelegatesAndMethods.csproj", "{E6E26223-301A-41AD-BBC9-F5A98A2F8662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week10-11.05-DelegatesAndEvents", "Week10-11.05-DelegatesAndMethods\Week10-11.05-DelegatesAndEvents.csproj", "{E6E26223-301A-41AD-BBC9-F5A98A2F8662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

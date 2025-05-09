@@ -915,9 +915,7 @@ namespace Week12
             Console.ReadKey();
 
 
-
-
-
+            
         }
         // ÖRNEK METOTlar - Action için
         static void SelamlamaYazdir()

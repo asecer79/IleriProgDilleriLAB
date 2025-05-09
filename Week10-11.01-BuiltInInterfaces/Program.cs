@@ -307,3 +307,12 @@ class Program
 }
 */
 #endregion
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        
+    }
+}

@@ -917,6 +917,7 @@ namespace Week12
 
 
 
+
         }
         // ÖRNEK METOTlar - Action için
         static void SelamlamaYazdir()

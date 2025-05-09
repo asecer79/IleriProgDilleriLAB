@@ -894,7 +894,6 @@ namespace Week12
 
             Console.WriteLine();
 
-
             // ÖRNEK 10: Expression Trees (İfade Ağaçları) ve Lambdalar
             // ============================
             Console.WriteLine("### ÖRNEK 10: Expression Trees ve Lambdalar ###");
@@ -913,8 +912,6 @@ namespace Week12
             Console.WriteLine("Compiled Expression Sonucu: " + compiledExpression(15));
 
             Console.ReadKey();
-
-
             
         }
         // ÖRNEK METOTlar - Action için

@@ -255,7 +255,6 @@
             t2.Join();
 
             Console.WriteLine("Final Balance: " + account.Balance);
-
         }
     }
 }

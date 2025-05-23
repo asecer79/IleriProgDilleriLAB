@@ -168,7 +168,7 @@
 
     //Thread synchronization ve concurrency
 
-    //thread safe class
+    //thread safe class with lock
     public class BankAccount
     {
         public int Balance = 1000;
@@ -201,6 +201,76 @@
         }
     }
 
+
+    //thread safe class with Mutex
+    public class BankAccountMutex
+    {
+        public int Balance = 1000;
+
+        //bir iş parçacığının belirli bir kod bloğunu çalıştırırken diğer iş parçacıklarının o kod bloğuna erişimini engeller.
+        private readonly Mutex _mutex = new Mutex();
+
+        public void Deposit(int amount)
+        {
+            _mutex.WaitOne();
+            int temp = Balance;
+            Thread.Sleep(1); // işlem gecikmesi simülasyonu
+            temp += amount;
+            Balance = temp;
+            Console.WriteLine(Balance);
+            _mutex.ReleaseMutex();
+
+        }
+
+        public void Withdraw(int amount)
+        {
+            _mutex.WaitOne();
+
+            int temp = Balance;
+            Thread.Sleep(1); // işlem gecikmesi simülasyonu
+            temp -= amount;
+            Balance = temp;
+            Console.WriteLine(Balance);
+
+            _mutex.ReleaseMutex();
+
+        }
+    }
+
+    public class BankAccountSemaphore
+    {
+        public int Balance = 1000;
+
+        //bir iş parçacığının belirli bir kod bloğunu çalıştırırken diğer iş parçacıklarının o kod bloğuna erişimini engeller.
+        private readonly Semaphore _semaphore = new Semaphore(1, 1);
+
+        public void Deposit(int amount)
+        {
+            _semaphore.WaitOne();
+            int temp = Balance;
+            Thread.Sleep(1); // işlem gecikmesi simülasyonu
+            temp += amount;
+            Balance = temp;
+            Console.WriteLine(Balance);
+            _semaphore.Release();
+
+        }
+
+        public void Withdraw(int amount)
+        {
+            _semaphore.WaitOne();
+
+            int temp = Balance;
+            Thread.Sleep(1); // işlem gecikmesi simülasyonu
+            temp -= amount;
+            Balance = temp;
+            Console.WriteLine(Balance);
+
+            _semaphore.Release();
+
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -208,7 +278,11 @@
             Console.WriteLine("Sonucu görmek için enter a basınız");
 
 
-            BankAccount account = new BankAccount();
+            //BankAccount account = new BankAccount(); //with lock
+            //BankAccountMutex account = new BankAccountMutex();  //with mutex
+            BankAccountSemaphore account = new BankAccountSemaphore();  //with semaphore
+
+
 
             Console.WriteLine("Initial Balance: " + account.Balance);
 
@@ -232,29 +306,79 @@
             //t8.Start();
 
 
-            Thread t1 = new Thread(() =>
-                {
-                    for (int i = 1; i <= 10; i++)
-                    {
-                        account.Deposit(100);
-                    }
-                });
+            /* Thread t1 = new Thread(() =>
+                 {
+                     for (int i = 1; i <= 10; i++)
+                     {
+                         account.Deposit(100);
+                     }
+                 });
 
-            Thread t2 = new Thread(() =>
+             Thread t2 = new Thread(() =>
+             {
+                 for (int i = 1; i <= 10; i++)
+                 {
+                     account.Withdraw(100);
+                 }
+             });
+
+             t1.Start();
+             t2.Start();
+
+             t1.Join();
+             t2.Join();
+
+             Console.WriteLine("Final Balance: " + account.Balance);*/
+
+
+            //process1 
+            using (var mutex = new Mutex(false, @"C:\Files\MySharedMutex"))
             {
-                for (int i = 1; i <= 10; i++)
-                {
-                    account.Withdraw(100);
-                }
-            });
+                Console.WriteLine("App1: Mutex bekleniyor...");
+                mutex.WaitOne();
+                Console.WriteLine("App1: Mutex alındı. 5 saniye işlem yapılıyor...");
+                Thread.Sleep(5000);
+                Console.WriteLine("App1: İşlem bitti, Mutex bırakılıyor.");
+                mutex.ReleaseMutex();
+            }
 
-            t1.Start();
-            t2.Start();
 
-            t1.Join();
-            t2.Join();
+            //process2 
+            using (var mutex = new Mutex(false, @"C:\Files\MySharedMutex"))
+            {
+                Console.WriteLine("App2: Mutex bekleniyor...");
+                mutex.WaitOne();
+                Console.WriteLine("App2: Mutex alındı. 3 saniye işlem yapılıyor...");
+                Thread.Sleep(3000);
+                Console.WriteLine("App2: İşlem bitti, Mutex bırakılıyor.");
+                mutex.ReleaseMutex();
+            }
 
-            Console.WriteLine("Final Balance: " + account.Balance);
+
+            /*
+
+            bool createdNew;
+            Semaphore semaphore = new Semaphore(1, 1, "Global\\MySharedSemaphore", out createdNew);
+
+            Console.WriteLine("App1: Semaphore bekleniyor...");
+            semaphore.WaitOne(); // kilidi al
+            Console.WriteLine("App1: Semaphore alındı. 5 saniye işlem yapılıyor...");
+            Thread.Sleep(5000);
+            Console.WriteLine("App1: İşlem tamamlandı. Semaphore serbest bırakılıyor.");
+            semaphore.Release(); // kilidi bırak
+
+
+
+            bool createdNew;
+            Semaphore semaphore = new Semaphore(1, 1, "Global\\MySharedSemaphore", out createdNew);
+
+            Console.WriteLine("App2: Semaphore bekleniyor...");
+            semaphore.WaitOne(); // kilidi al
+            Console.WriteLine("App2: Semaphore alındı. 3 saniye işlem yapılıyor...");
+            Thread.Sleep(3000);
+            Console.WriteLine("App2: İşlem tamamlandı. Semaphore serbest bırakılıyor.");
+            semaphore.Release(); // kilidi bırak
+            */
         }
     }
 }
